@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const path = require("path");
-const webpack = require("webpack")
+const webpack = require("webpack");
 
 module.exports = merge(common, {
   //MODE
@@ -38,11 +38,19 @@ module.exports = merge(common, {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      }
-    ]
-  }
-
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  targets: {
+                    esmodules: true,
+                  },
+                },
+              ],
+            ],
+          },
+        },
+      },
+    ],
+  },
 });
